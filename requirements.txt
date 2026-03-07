@@ -4,3 +4,4 @@ opencv-python
 python-barcode
 pyzbar
 qrcode
+matplotlib

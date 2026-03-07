@@ -1,3 +1,5 @@
 /assets
 /test
+__pycache__/
+*.png
 .claude/settings.local.json

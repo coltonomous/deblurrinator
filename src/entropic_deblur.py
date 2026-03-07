@@ -364,11 +364,14 @@ prepare_signal = prepare_signal_1d  # back-compat
 
 def entropic_blind_deblur(b, r, m, alpha=1e6, beta=1e6,
                           max_kernel_width=None, inner_iters=5,
-                          check_fn=None, extract_fn=None, verbose=True):
+                          check_fn=None, extract_fn=None,
+                          snapshots=None, verbose=True):
     """Alternating kernel/image estimation with coarse-to-fine kernel widths.
 
     check_fn(x_modules) should return decoded string or None.
     extract_fn(x_thresh) should strip quiet zone and invert back to image convention.
+    snapshots: if a list is passed, intermediate (x_modules, c_hat, kw, iter) tuples
+               are appended after each iteration for visualization.
     """
     is_2d = b.ndim == 2
 
@@ -394,8 +397,13 @@ def entropic_blind_deblur(b, r, m, alpha=1e6, beta=1e6,
             c_hat = estimate_kernel(b, x_hat, kernel_shape, m, beta)
             x_hat = estimate_image(b, c_hat, r, m, alpha)
 
+            x_thresh = (x_hat > 0.5).astype(np.float64)
+            x_modules = extract_fn(x_thresh)
+
+            if snapshots is not None:
+                snapshots.append((x_modules.copy(), c_hat.copy(), kw, j + 1))
+
             if check_fn is not None:
-                x_modules = extract_fn((x_hat > 0.5).astype(np.float64))
                 result = check_fn(x_modules)
                 if result:
                     if verbose:
@@ -507,12 +515,34 @@ def blur_signal(signal, kernel, noise_var=0.0):
     return b
 
 
+# --- Visualization helpers ---
+
+def _barcode_img(x, m, height=60):
+    """Render a 1D barcode module array as a 2D grayscale image."""
+    row = upscale(x, m)
+    return np.tile((row * 255).astype(np.uint8).reshape(1, -1), (height, 1))
+
+
+def _qr_img(x, m):
+    """Render a 2D QR module array as a grayscale image."""
+    return (upscale(x, m) * 255).astype(np.uint8)
+
+
+def _pick_snapshots(snapshots, n=4):
+    """Pick n evenly-spaced snapshots from the list (always including last)."""
+    if len(snapshots) <= n:
+        return snapshots
+    indices = np.linspace(0, len(snapshots) - 1, n, dtype=int)
+    return [snapshots[i] for i in indices]
+
+
 # --- Demos ---
 
-def demo(blur_width=21, sigma=1.0, m=5, noise_var=0.0,
-         alpha=1e6, beta=1e6):
-    """Blind-deblur a synthetic UPC-A barcode."""
+def demo(blur_width=21, sigma=1.0, m=3, noise_var=0.0,
+         alpha=1e6, beta=1e6, max_kernel_width=15, show=True):
+    """Blind-deblur a synthetic UPC-A barcode with visualization."""
     import random
+    import matplotlib.pyplot as plt
 
     digits = ''.join([str(random.randint(0, 9)) for _ in range(11)])
     digits += compute_check_digit(digits)
@@ -521,26 +551,102 @@ def demo(blur_width=21, sigma=1.0, m=5, noise_var=0.0,
     x = encode_upca(digits)
     kernel = gaussian_kernel_1d(blur_width, sigma)
     b, r_inv = prepare_signal_1d(x, m, kernel, noise_var)
-    print(f"Gaussian blur: width={blur_width}, sigma={sigma:.1f}")
+    print(f"Gaussian blur: width={blur_width}, sigma={sigma:.1f}, m={m}")
 
     check = make_check_fn(m)
     extract = make_extract_fn_1d(UPCA_QUIET_ZONE, UPCA_N)
 
-    x_hat, c_hat, success = entropic_blind_deblur(
+    # First pass: collect all snapshots (no early stopping)
+    snaps = []
+    entropic_blind_deblur(
         b, r_inv, m, alpha=alpha, beta=beta,
-        check_fn=check, extract_fn=extract, verbose=True
+        max_kernel_width=max_kernel_width,
+        check_fn=None, extract_fn=extract,
+        snapshots=snaps, verbose=False
     )
+
+    # Find which snapshot first decoded
+    decoded_idx = None
+    for i, (x_snap, _, kw, it) in enumerate(snaps):
+        if check and check(x_snap):
+            decoded_idx = i
+            break
+
+    # Pick snapshots to show — always include first, decoded, and last
+    if decoded_idx is not None:
+        # Show progression up to and including the decode point
+        pool = snaps[:decoded_idx + 1]
+        picked = _pick_snapshots(pool, n=4)
+        final_snap = snaps[decoded_idx]
+        x_hat = final_snap[0]
+        success = True
+        kw_d, it_d = final_snap[2], final_snap[3]
+        print(f"Decoded at kernel_width={kw_d}, iter={it_d}")
+    else:
+        picked = _pick_snapshots(snaps, n=4)
+        x_hat = snaps[-1][0] if snaps else extract(r_inv)
+        success = False
+        print("Terminated without decoding")
 
     accuracy = np.mean(x_hat == x) * 100
     print(f"{'SUCCESS' if success else 'FAILED'} — {accuracy:.1f}% module accuracy")
 
-    return x, x_hat, b, c_hat, kernel
+    if not show:
+        return x, x_hat, b, kernel
+
+    n_snaps = len(picked)
+    n_cols = 2 + n_snaps
+
+    fig, axes = plt.subplots(2, n_cols, figsize=(3 * n_cols, 4),
+                             gridspec_kw={'height_ratios': [3, 1]})
+
+    bar_h = 80
+
+    axes[0, 0].imshow(_barcode_img(x, m, bar_h), cmap='gray', vmin=0, vmax=255)
+    axes[0, 0].set_title('Original', fontsize=9)
+    axes[1, 0].plot(upscale(x, m), 'k', linewidth=0.5)
+    axes[1, 0].set_ylim(-0.1, 1.1)
+    axes[1, 0].set_title('Signal', fontsize=8)
+
+    blurred_img = np.tile((np.clip(b, 0, 1) * 255).astype(np.uint8).reshape(1, -1), (bar_h, 1))
+    axes[0, 1].imshow(blurred_img, cmap='gray', vmin=0, vmax=255)
+    axes[0, 1].set_title(f'Blurred (w={blur_width})', fontsize=9)
+    axes[1, 1].plot(b, 'b', linewidth=0.5)
+    axes[1, 1].set_ylim(-0.1, 1.1)
+    axes[1, 1].set_title('Blurred signal', fontsize=8)
+
+    for col, (x_snap, c_snap, kw, it) in enumerate(picked, start=2):
+        acc = np.mean(x_snap == x) * 100
+        is_decoded = check and check(x_snap)
+        label = f'kw={kw} i={it}\n{acc:.0f}%'
+        if is_decoded:
+            label += ' *'
+        axes[0, col].imshow(_barcode_img(x_snap, m, bar_h), cmap='gray', vmin=0, vmax=255)
+        axes[0, col].set_title(label, fontsize=9,
+                               color='green' if is_decoded else 'black',
+                               fontweight='bold' if is_decoded else 'normal')
+        axes[1, col].bar(range(len(c_snap)), c_snap, color='steelblue', width=0.8)
+        axes[1, col].set_title(f'Kernel ({kw})', fontsize=8)
+
+    for ax in axes.flat:
+        ax.set_xticks([])
+        ax.set_yticks([])
+
+    fig.suptitle(f'UPC-A Blind Deblurring — {digits}', fontsize=11, y=1.02)
+    plt.tight_layout()
+    plt.savefig('demo_barcode.png', dpi=150, bbox_inches='tight')
+    print("Saved demo_barcode.png")
+    plt.show()
+
+    return x, x_hat, b, kernel
 
 
 def demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5,
             noise_var=0.0, alpha=1e6, beta=1e6,
-            error_correction='M', version=None):
-    """Blind-deblur a synthetic QR code."""
+            error_correction='M', version=None, max_kernel_width=11, show=True):
+    """Blind-deblur a synthetic QR code with visualization."""
+    import matplotlib.pyplot as plt
+
     x, ver = encode_qr(data, version=version, error_correction=error_correction)
     size = qr_size(ver)
     print(f"QR data={data!r}, version {ver} ({size}x{size})")
@@ -552,16 +658,82 @@ def demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5,
     check = make_qr_check_fn(m)
     extract = make_extract_fn_2d(QR_QUIET_ZONE, size)
 
-    x_hat, c_hat, success = entropic_blind_deblur(
+    # Collect all snapshots without early stopping
+    snaps = []
+    entropic_blind_deblur(
         b, r_inv, m, alpha=alpha, beta=beta,
-        check_fn=check, extract_fn=extract, verbose=True
+        max_kernel_width=max_kernel_width,
+        check_fn=None, extract_fn=extract,
+        snapshots=snaps, verbose=False
     )
+
+    decoded_idx = None
+    for i, (x_snap, _, kw, it) in enumerate(snaps):
+        if check and check(x_snap):
+            decoded_idx = i
+            break
+
+    if decoded_idx is not None:
+        pool = snaps[:decoded_idx + 1]
+        picked = _pick_snapshots(pool, n=4)
+        x_hat = snaps[decoded_idx][0]
+        success = True
+        kw_d, it_d = snaps[decoded_idx][2], snaps[decoded_idx][3]
+        print(f"Decoded at kernel_width={kw_d}, iter={it_d}")
+    else:
+        picked = _pick_snapshots(snaps, n=4)
+        x_hat = snaps[-1][0] if snaps else extract(r_inv)
+        success = False
+        print("Terminated without decoding")
 
     accuracy = np.mean(x_hat == x) * 100
     print(f"{'SUCCESS' if success else 'FAILED'} — {accuracy:.1f}% module accuracy")
 
-    return x, x_hat, b, c_hat, kernel
+    if not show:
+        return x, x_hat, b, kernel
+
+    n_snaps = len(picked)
+    n_cols = 2 + n_snaps
+
+    fig, axes = plt.subplots(2, n_cols, figsize=(3 * n_cols, 6),
+                             gridspec_kw={'height_ratios': [3, 1]})
+
+    axes[0, 0].imshow(_qr_img(x, m), cmap='gray', vmin=0, vmax=255, interpolation='nearest')
+    axes[0, 0].set_title('Original', fontsize=9)
+    axes[1, 0].axis('off')
+
+    blurred_vis = (np.clip(b, 0, 1) * 255).astype(np.uint8)
+    axes[0, 1].imshow(blurred_vis, cmap='gray', vmin=0, vmax=255, interpolation='nearest')
+    axes[0, 1].set_title(f'Blurred (w={blur_width})', fontsize=9)
+    axes[1, 1].imshow(kernel, cmap='hot', interpolation='nearest')
+    axes[1, 1].set_title('True kernel', fontsize=8)
+
+    for col, (x_snap, c_snap, kw, it) in enumerate(picked, start=2):
+        acc = np.mean(x_snap == x) * 100
+        is_decoded = check and check(x_snap)
+        label = f'kw={kw} i={it}\n{acc:.0f}%'
+        if is_decoded:
+            label += ' *'
+        axes[0, col].imshow(_qr_img(x_snap, m), cmap='gray', vmin=0, vmax=255, interpolation='nearest')
+        axes[0, col].set_title(label, fontsize=9,
+                               color='green' if is_decoded else 'black',
+                               fontweight='bold' if is_decoded else 'normal')
+        axes[1, col].imshow(c_snap, cmap='hot', interpolation='nearest')
+        axes[1, col].set_title(f'Kernel ({kw}x{kw})', fontsize=8)
+
+    for ax in axes.flat:
+        ax.set_xticks([])
+        ax.set_yticks([])
+
+    fig.suptitle(f'QR Blind Deblurring — {data!r}', fontsize=11, y=1.02)
+    plt.tight_layout()
+    plt.savefig('demo_qr.png', dpi=150, bbox_inches='tight')
+    print("Saved demo_qr.png")
+    plt.show()
+
+    return x, x_hat, b, kernel
 
 
 if __name__ == '__main__':
     demo()
+    demo_qr()
