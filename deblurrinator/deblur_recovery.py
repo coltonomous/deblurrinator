@@ -44,6 +44,7 @@ from .entropic_deblur import (
     make_qr_check_fn,
     make_extract_fn_1d,
     make_extract_fn_2d,
+    _xt_lam,
 )
 from scipy.optimize import minimize
 from scipy.signal import fftconvolve
@@ -99,8 +100,6 @@ def _estimate_image_fast(b, c, r, m, alpha, gtol, maxiter):
 
 
 def _estimate_kernel_fast(b, x_hat, kernel_shape, m, beta, gtol, maxiter):
-    from .entropic_deblur import _xt_lam
-
     shape_b = b.shape
     signal = upscale(x_hat, m)
     signal_flip = _flip(signal)

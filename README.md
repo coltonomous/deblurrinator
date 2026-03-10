@@ -15,34 +15,86 @@ A barcode is modeled as N independent Bernoulli random variables — each module
 
 Directly optimizing over 2^N distributions is intractable. Fenchel-Rockafellar duality reduces this to a dual problem with only Nm variables (pixels in the blurred signal), which L-BFGS handles easily. The algorithm alternates between estimating the blur kernel and estimating the barcode image, sweeping kernel widths from small to large until the result decodes.
 
-## Usage
+## Installation
 
 ```bash
-pip install -r requirements.txt
-brew install zbar  # needed by pyzbar
+pip install .               # core (numpy, scipy, pyzbar, qrcode)
+pip install ".[demo]"       # + matplotlib for visualizations
+pip install ".[cv]"         # + opencv, python-barcode for image utilities
 ```
 
-### 1D barcode (UPC-A)
+**System dependency**: pyzbar requires the zbar library:
+```bash
+# macOS
+brew install zbar
 
-```python
-from src.entropic_deblur import demo
-x, x_hat, b, c_hat, kernel = demo(blur_width=21, sigma=1.0)
+# Ubuntu/Debian
+sudo apt-get install libzbar0
+
+# Fedora
+sudo dnf install zbar
 ```
 
-### QR code
+## Quick start: recovery mode
+
+The primary interface for integrating into an existing project. Use this as a fallback when your normal barcode scanner fails on a blurry image:
 
 ```python
-from src.entropic_deblur import demo_qr
-x, x_hat, b, c_hat, kernel = demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5)
+from deblurrinator import recover_barcode, recover_qr
+
+# 1D barcode — pass the blurred scanline (1D array, values in [0, 1])
+result = recover_barcode(blurred_signal, m=3)
+if result.success:
+    print(result.data)       # decoded string
+    print(result.modules)    # recovered binary module array
+
+# QR code — pass the blurred image (2D array, values in [0, 1])
+result = recover_qr(blurred_image, m=5, version=1)
+if result.success:
+    print(result.data)
 ```
 
-### Custom usage
+Recovery mode uses relaxed optimization parameters (`gtol=1e-6`, `maxiter=200`, `inner_iters=2`) for faster convergence with early stopping — it returns as soon as the barcode decodes successfully.
+
+### DeblurResult fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | bool | Whether decoding succeeded |
+| `data` | str or None | Decoded barcode string |
+| `modules` | ndarray or None | Recovered binary module array |
+| `kernel` | ndarray or None | Estimated blur kernel |
+| `iterations` | int | Total alternating iterations performed |
+| `kernel_width` | int | Kernel width at termination |
+
+## Demos
+
+Run the visual demos to see the algorithm push through heavy blur:
 
 ```python
-from src.entropic_deblur import (
-    encode_upca, upca_symbolic_prior, prepare_signal_1d,
-    entropic_blind_deblur, make_check_fn, make_extract_fn_1d,
-    gaussian_kernel_1d, UPCA_QUIET_ZONE, UPCA_N
+from deblurrinator import demo, demo_qr
+
+# 1D: recovers UPC-A from blur_width=21 Gaussian blur
+x, x_hat, b, kernel = demo(blur_width=21, sigma=1.0)
+
+# 2D: recovers QR code from blur_width=5 Gaussian blur
+x, x_hat, b, kernel = demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5)
+```
+
+Or from the command line:
+```bash
+python -m deblurrinator.entropic_deblur
+```
+
+## Full algorithm access
+
+For maximum control, use the core algorithm directly:
+
+```python
+from deblurrinator import (
+    encode_upca, prepare_signal_1d, entropic_blind_deblur,
+    make_check_fn, make_extract_fn_1d, gaussian_kernel_1d,
+    UPCA_QUIET_ZONE, UPCA_N,
 )
 
 x = encode_upca("01234567890")
@@ -58,13 +110,15 @@ x_hat, c_hat, success = entropic_blind_deblur(
 
 ## Parameters
 
-| Parameter | Default | Notes |
-|-----------|---------|-------|
-| `m` | 5 | Pixels per module. Higher = better accuracy but slower. |
-| `alpha` | 1e6 | Image estimation fidelity weight. |
-| `beta` | 1e6 | Kernel estimation fidelity weight. |
-| `inner_iters` | 5 | Alternating iterations per kernel width. |
-| `max_kernel_width` | auto | Largest kernel to try. Defaults to half the signal length. |
+| Parameter | Recovery default | Full default | Notes |
+|-----------|-----------------|--------------|-------|
+| `m` | 3 | 5 | Pixels per module. Higher = better accuracy but slower. |
+| `alpha` | 1e6 | 1e6 | Image estimation fidelity weight. |
+| `beta` | 1e6 | 1e6 | Kernel estimation fidelity weight. |
+| `inner_iters` | 2 | 5 | Alternating iterations per kernel width. |
+| `max_kernel_width` | 15 | auto | Largest kernel to try. |
+| `gtol` | 1e-6 | 1e-10 | L-BFGS gradient tolerance. |
+| `maxiter` | 200 | 500 | L-BFGS max iterations per solve. |
 
 ## Notes
 
@@ -75,5 +129,5 @@ x_hat, c_hat, success = entropic_blind_deblur(
 ## Requirements
 
 - Python 3.8+
-- numpy, scipy, opencv-python, python-barcode, pyzbar, qrcode
-- zbar (system library, for pyzbar)
+- numpy, scipy, pyzbar, qrcode
+- zbar (system library)
