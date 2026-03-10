@@ -2,4 +2,5 @@
 /test
 __pycache__/
 *.png
-.claude/settings.local.jsondeblurrinator.egg-info/
+.claude/settings.local.json
+deblurrinator.egg-info/
