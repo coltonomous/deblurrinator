@@ -253,7 +253,7 @@ def _softmax_w(z, w):
 
 # --- Image estimation (Section 2.1) ---
 
-def estimate_image(b, c, r, m, alpha):
+def estimate_image(b, c, r, m, alpha, gtol=1e-10, maxiter=500):
     """Solve the image dual (eq 9) via L-BFGS, recover x_hat via eq 15."""
     shape_b = b.shape
     c_flip = _flip(c)
@@ -269,7 +269,7 @@ def estimate_image(b, c, r, m, alpha):
         return f, g.ravel()
 
     res = minimize(objective_and_grad, np.zeros(b.size), jac=True,
-                   method='L-BFGS-B', options={'maxiter': 500, 'gtol': 1e-10})
+                   method='L-BFGS-B', options={'maxiter': maxiter, 'gtol': gtol})
 
     lam_opt = res.x.reshape(shape_b)
     v_opt = downscale_sum(fftconvolve(lam_opt, c_flip, mode='same'), m)
@@ -296,7 +296,7 @@ def _xt_lam(lam, signal_flip, Nm_shape, kernel_shape):
     return full[start_h : start_h + kh, start_w : start_w + kw].copy()
 
 
-def estimate_kernel(b, x_hat, kernel_shape, m, beta):
+def estimate_kernel(b, x_hat, kernel_shape, m, beta, gtol=1e-10, maxiter=500):
     """Solve the kernel dual (eq 16) via L-BFGS, recover c_hat via weighted softmax (eq 17)."""
     shape_b = b.shape
     signal = upscale(x_hat, m)
@@ -325,7 +325,7 @@ def estimate_kernel(b, x_hat, kernel_shape, m, beta):
         return f, g.ravel()
 
     res = minimize(objective_and_grad, np.zeros(b.size), jac=True,
-                   method='L-BFGS-B', options={'maxiter': 500, 'gtol': 1e-10})
+                   method='L-BFGS-B', options={'maxiter': maxiter, 'gtol': gtol})
 
     lam_opt = res.x.reshape(shape_b)
     return _softmax_w(xt(lam_opt).ravel(), nu).reshape(k_shape)
@@ -357,9 +357,6 @@ def prepare_signal_2d(x, m, kernel, noise_var=0.0, version=None):
     x_padded = np.pad(x_inv, qz, mode='constant', constant_values=0)
     r_padded = np.pad(r_inv, qz, mode='constant', constant_values=0)
     return blur_signal(upscale(x_padded, m), kernel, noise_var), r_padded
-
-
-prepare_signal = prepare_signal_1d  # back-compat
 
 
 def entropic_blind_deblur(b, r, m, alpha=1e6, beta=1e6,

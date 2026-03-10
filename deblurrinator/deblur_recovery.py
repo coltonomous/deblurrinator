@@ -1,27 +1,18 @@
 """Recovery-mode barcode deblurring.
 
-A practical module for integrating entropic blind deblurring as a fallback
-when standard barcode scanning fails. Optimized for speed over exhaustive
-search: relaxed convergence tolerances, fewer inner iterations, and
-early stopping on successful decode.
+Wraps the core entropic blind deblurring with relaxed parameters for
+speed: looser gradient tolerance, fewer L-BFGS iterations, and early
+stopping on successful decode. Intended as a fallback when a standard
+barcode scanner fails on a blurry image.
 
-Usage:
+    from deblurrinator import recover_barcode, recover_qr
 
-    from deblur_recovery import recover_barcode, recover_qr
-
-    # 1D barcode: pass a grayscale numpy array (0-255 or 0.0-1.0)
-    result = recover_barcode(blurred_image, m=3)
-    if result.success:
-        print(result.data)       # decoded string
-        print(result.modules)    # recovered binary modules
-
-    # QR code: same interface
-    result = recover_qr(blurred_image, m=5, version=1)
+    result = recover_barcode(blurred_signal, m=3)
     if result.success:
         print(result.data)
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
 
 import numpy as np
@@ -33,36 +24,20 @@ from .entropic_deblur import (
     upca_symbolic_prior,
     qr_symbolic_prior,
     qr_size,
-    upscale,
-    downscale_sum,
-    _flip,
-    _log_partition,
-    _sigmoid_r,
-    _log_sum_exp_w,
-    _softmax_w,
+    estimate_image,
+    estimate_kernel,
     make_check_fn,
     make_qr_check_fn,
     make_extract_fn_1d,
     make_extract_fn_2d,
-    _xt_lam,
 )
-from scipy.optimize import minimize
-from scipy.signal import fftconvolve
 
 
-# --- Recovery-tuned defaults ---
-
-# Relaxed gradient tolerance: binary signals don't need 1e-10 precision
+# Recovery-tuned defaults (vs 1e-10 / 500 / 5 in the full algorithm)
 _GTOL = 1e-6
-
-# Fewer L-BFGS iterations per solve (the early ones do most of the work)
 _MAXITER = 200
-
-# Fewer alternations per kernel width (1-2 is usually enough for small widths)
 _INNER_ITERS = 2
 
-
-# --- Result container ---
 
 @dataclass
 class DeblurResult:
@@ -75,67 +50,9 @@ class DeblurResult:
     kernel_width: int = 0
 
 
-# --- Fast estimation routines (mirrors entropic_deblur but with relaxed params) ---
-
-def _estimate_image_fast(b, c, r, m, alpha, gtol, maxiter):
-    shape_b = b.shape
-    c_flip = _flip(c)
-    inv_a = 1.0 / alpha
-
-    def objective_and_grad(lam_flat):
-        lam = lam_flat.reshape(shape_b)
-        v = downscale_sum(fftconvolve(lam, c_flip, mode='same'), m)
-        lp = _log_partition(v, r)
-        sig = _sigmoid_r(v, r)
-        f = -np.sum(b * lam) + 0.5 * inv_a * np.sum(lam**2) + np.sum(lp)
-        g = -b + inv_a * lam + fftconvolve(upscale(sig, m), c, mode='same')
-        return f, g.ravel()
-
-    res = minimize(objective_and_grad, np.zeros(b.size), jac=True,
-                   method='L-BFGS-B', options={'maxiter': maxiter, 'gtol': gtol})
-
-    lam_opt = res.x.reshape(shape_b)
-    v_opt = downscale_sum(fftconvolve(lam_opt, c_flip, mode='same'), m)
-    return _sigmoid_r(v_opt, r)
-
-
-def _estimate_kernel_fast(b, x_hat, kernel_shape, m, beta, gtol, maxiter):
-    shape_b = b.shape
-    signal = upscale(x_hat, m)
-    signal_flip = _flip(signal)
-    inv_b = 1.0 / beta
-
-    if isinstance(kernel_shape, int):
-        kernel_size = kernel_shape
-        k_shape = (kernel_shape,)
-    else:
-        kernel_size = kernel_shape[0] * kernel_shape[1]
-        k_shape = kernel_shape
-
-    nu = np.ones(kernel_size) / kernel_size
-
-    def xt(lam):
-        return _xt_lam(lam, signal_flip, shape_b, kernel_shape)
-
-    def objective_and_grad(lam_flat):
-        lam = lam_flat.reshape(shape_b)
-        xtl = xt(lam).ravel()
-        lse = _log_sum_exp_w(xtl, nu)
-        sm = _softmax_w(xtl, nu).reshape(k_shape)
-        f = -np.sum(b * lam) + 0.5 * inv_b * np.sum(lam**2) + lse
-        g = -b + inv_b * lam + fftconvolve(signal, sm, mode='same')
-        return f, g.ravel()
-
-    res = minimize(objective_and_grad, np.zeros(b.size), jac=True,
-                   method='L-BFGS-B', options={'maxiter': maxiter, 'gtol': gtol})
-
-    lam_opt = res.x.reshape(shape_b)
-    return _softmax_w(xt(lam_opt).ravel(), nu).reshape(k_shape)
-
-
-def _fast_blind_deblur(b, r, m, alpha, beta, max_kernel_width,
-                       inner_iters, gtol, maxiter, check_fn, extract_fn):
-    """Core loop: alternating estimation with early stopping."""
+def _recovery_loop(b, r, m, alpha, beta, max_kernel_width,
+                   inner_iters, gtol, maxiter, check_fn, extract_fn):
+    """Alternating estimation with early stopping on decode."""
     is_2d = b.ndim == 2
     x_hat = r.copy()
     c_hat = None
@@ -149,8 +66,10 @@ def _fast_blind_deblur(b, r, m, alpha, beta, max_kernel_width,
         kernel_shape = (kw, kw) if is_2d else kw
 
         for j in range(inner_iters):
-            c_hat = _estimate_kernel_fast(b, x_hat, kernel_shape, m, beta, gtol, maxiter)
-            x_hat = _estimate_image_fast(b, c_hat, r, m, alpha, gtol, maxiter)
+            c_hat = estimate_kernel(b, x_hat, kernel_shape, m, beta,
+                                    gtol=gtol, maxiter=maxiter)
+            x_hat = estimate_image(b, c_hat, r, m, alpha,
+                                   gtol=gtol, maxiter=maxiter)
             total_iters += 1
 
             x_thresh = (x_hat > 0.5).astype(np.float64)
@@ -171,8 +90,6 @@ def _fast_blind_deblur(b, r, m, alpha, beta, max_kernel_width,
         iterations=total_iters, kernel_width=kw if c_hat is not None else 0,
     )
 
-
-# --- Public API ---
 
 def recover_barcode(
     blurred_signal: np.ndarray,
@@ -214,18 +131,15 @@ def recover_barcode(
     if b.ndim != 1:
         raise ValueError(f"Expected 1D signal, got shape {b.shape}")
 
-    # Build the inverted prior (algorithm works in inverted space)
     r_inv = 1.0 - upca_symbolic_prior()
     r_padded = np.concatenate([
         np.zeros(UPCA_QUIET_ZONE), r_inv, np.zeros(UPCA_QUIET_ZONE)
     ])
 
-    check = make_check_fn(m)
-    extract = make_extract_fn_1d(UPCA_QUIET_ZONE, UPCA_N)
-
-    return _fast_blind_deblur(
+    return _recovery_loop(
         b, r_padded, m, alpha, beta, max_kernel_width,
-        inner_iters, gtol, maxiter, check, extract,
+        inner_iters, gtol, maxiter,
+        make_check_fn(m), make_extract_fn_1d(UPCA_QUIET_ZONE, UPCA_N),
     )
 
 
@@ -273,7 +187,6 @@ def recover_qr(
         raise ValueError(f"Expected 2D image, got shape {b.shape}")
 
     if version is None:
-        # Estimate version from image dimensions
         estimated_modules = b.shape[0] / m - 2 * QR_QUIET_ZONE
         version = max(1, round((estimated_modules - 17) / 4))
 
@@ -281,10 +194,8 @@ def recover_qr(
     r_inv = 1.0 - qr_symbolic_prior(version)
     r_padded = np.pad(r_inv, QR_QUIET_ZONE, mode='constant', constant_values=0)
 
-    check = make_qr_check_fn(m)
-    extract = make_extract_fn_2d(QR_QUIET_ZONE, size)
-
-    return _fast_blind_deblur(
+    return _recovery_loop(
         b, r_padded, m, alpha, beta, max_kernel_width,
-        inner_iters, gtol, maxiter, check, extract,
+        inner_iters, gtol, maxiter,
+        make_qr_check_fn(m), make_extract_fn_2d(QR_QUIET_ZONE, size),
     )

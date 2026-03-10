@@ -18,77 +18,37 @@ Directly optimizing over 2^N distributions is intractable. Fenchel-Rockafellar d
 ## Installation
 
 ```bash
-pip install .               # core (numpy, scipy, pyzbar, qrcode)
-pip install ".[demo]"       # + matplotlib for visualizations
-pip install ".[cv]"         # + opencv, python-barcode for image utilities
+pip install .
 ```
 
-**System dependency**: pyzbar requires the zbar library:
-```bash
-# macOS
-brew install zbar
+pyzbar needs the zbar system library (`brew install zbar` on macOS, `apt install libzbar0` on Debian/Ubuntu).
 
-# Ubuntu/Debian
-sudo apt-get install libzbar0
+For the visualization demos: `pip install ".[demo]"`
 
-# Fedora
-sudo dnf install zbar
-```
+## Usage
 
-## Quick start: recovery mode
+### Drop-in recovery mode
 
-The primary interface for integrating into an existing project. Use this as a fallback when your normal barcode scanner fails on a blurry image:
+Use `recover_barcode` / `recover_qr` as a fallback when your barcode scanner chokes on a blurry image. These use relaxed solver parameters for speed and bail out as soon as decoding succeeds.
 
 ```python
 from deblurrinator import recover_barcode, recover_qr
 
-# 1D barcode — pass the blurred scanline (1D array, values in [0, 1])
 result = recover_barcode(blurred_signal, m=3)
 if result.success:
     print(result.data)       # decoded string
     print(result.modules)    # recovered binary module array
 
-# QR code — pass the blurred image (2D array, values in [0, 1])
 result = recover_qr(blurred_image, m=5, version=1)
 if result.success:
     print(result.data)
 ```
 
-Recovery mode uses relaxed optimization parameters (`gtol=1e-6`, `maxiter=200`, `inner_iters=2`) for faster convergence with early stopping — it returns as soon as the barcode decodes successfully.
+The result object also has `kernel` (estimated blur kernel), `iterations`, and `kernel_width`.
 
-### DeblurResult fields
+### Full algorithm
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | bool | Whether decoding succeeded |
-| `data` | str or None | Decoded barcode string |
-| `modules` | ndarray or None | Recovered binary module array |
-| `kernel` | ndarray or None | Estimated blur kernel |
-| `iterations` | int | Total alternating iterations performed |
-| `kernel_width` | int | Kernel width at termination |
-
-## Demos
-
-Run the visual demos to see the algorithm push through heavy blur:
-
-```python
-from deblurrinator import demo, demo_qr
-
-# 1D: recovers UPC-A from blur_width=21 Gaussian blur
-x, x_hat, b, kernel = demo(blur_width=21, sigma=1.0)
-
-# 2D: recovers QR code from blur_width=5 Gaussian blur
-x, x_hat, b, kernel = demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5)
-```
-
-Or from the command line:
-```bash
-python -m deblurrinator.entropic_deblur
-```
-
-## Full algorithm access
-
-For maximum control, use the core algorithm directly:
+For more control (or heavier blur), use the core algorithm directly. This runs the full alternating optimization with tighter tolerances.
 
 ```python
 from deblurrinator import (
@@ -108,26 +68,20 @@ x_hat, c_hat, success = entropic_blind_deblur(
 )
 ```
 
-## Parameters
+### Demos
 
-| Parameter | Recovery default | Full default | Notes |
-|-----------|-----------------|--------------|-------|
-| `m` | 3 | 5 | Pixels per module. Higher = better accuracy but slower. |
-| `alpha` | 1e6 | 1e6 | Image estimation fidelity weight. |
-| `beta` | 1e6 | 1e6 | Kernel estimation fidelity weight. |
-| `inner_iters` | 2 | 5 | Alternating iterations per kernel width. |
-| `max_kernel_width` | 15 | auto | Largest kernel to try. |
-| `gtol` | 1e-6 | 1e-10 | L-BFGS gradient tolerance. |
-| `maxiter` | 200 | 500 | L-BFGS max iterations per solve. |
+```python
+from deblurrinator import demo, demo_qr
+
+demo(blur_width=21, sigma=1.0)        # 1D UPC-A
+demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5)  # QR
+```
+
+Or: `python -m deblurrinator.entropic_deblur`
 
 ## Notes
 
+- `m` is pixels per module — higher means more signal to work with but slower solves. Recovery mode defaults to 3, full mode to 5.
 - **macOS**: pyzbar may need `DYLD_LIBRARY_PATH=/opt/homebrew/lib` to find zbar.
-- **2D is harder**: QR blind deblurring works well for moderate blur (kernel width up to ~9 pixels with m=5). Heavier blur may need parameter tuning or higher error correction levels.
+- **QR is harder**: works well for moderate blur (kernel width ~5 with m=5). Heavier blur may need parameter tuning or higher error correction.
 - The inverted convention (bars=1, spaces=0) ensures quiet zones map to zero, matching the zero-padding implicit in `fftconvolve`.
-
-## Requirements
-
-- Python 3.8+
-- numpy, scipy, pyzbar, qrcode
-- zbar (system library)
