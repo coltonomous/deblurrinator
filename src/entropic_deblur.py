@@ -734,6 +734,50 @@ def demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5,
     return x, x_hat, b, kernel
 
 
+def demo_recovery():
+    """Compare full demo (exhaustive) vs recovery mode (fast fallback)."""
+    import random
+    import time
+
+    digits = ''.join([str(random.randint(0, 9)) for _ in range(11)])
+    digits += compute_check_digit(digits)
+
+    x = encode_upca(digits)
+    kernel = gaussian_kernel_1d(21, 1.0)
+    b, r_inv = prepare_signal_1d(x, 3, kernel)
+
+    print(f"\n{'='*60}")
+    print(f"Recovery-mode comparison — UPC-A {digits}")
+    print(f"{'='*60}")
+
+    # Full (demo) mode
+    check = make_check_fn(3)
+    extract = make_extract_fn_1d(UPCA_QUIET_ZONE, UPCA_N)
+
+    t0 = time.perf_counter()
+    _, _, success_full = entropic_blind_deblur(
+        b, r_inv, m=3, max_kernel_width=15,
+        check_fn=check, extract_fn=extract, verbose=False,
+    )
+    t_full = time.perf_counter() - t0
+    print(f"Full mode:     {'OK' if success_full else 'FAIL'} in {t_full:.2f}s")
+
+    # Recovery mode (fast)
+    try:
+        from .deblur_recovery import recover_barcode
+    except ImportError:
+        from deblur_recovery import recover_barcode
+    t0 = time.perf_counter()
+    result = recover_barcode(b, m=3, max_kernel_width=15)
+    t_fast = time.perf_counter() - t0
+    print(f"Recovery mode: {'OK' if result.success else 'FAIL'} in {t_fast:.2f}s "
+          f"({result.iterations} iters, kw={result.kernel_width})")
+
+    if t_full > 0:
+        print(f"Speedup: {t_full / t_fast:.1f}x")
+
+
 if __name__ == '__main__':
     demo()
     demo_qr()
+    demo_recovery()
