@@ -289,8 +289,18 @@ DEFAULT_INNER_ITERS = 5
 
 # --- Image estimation (Section 2.1) ---
 
-def estimate_image(b, c, r, m, alpha, gtol=DEFAULT_GTOL, maxiter=DEFAULT_MAXITER):
-    """Solve the image dual (eq 9) via L-BFGS, recover x_hat via eq 15."""
+def estimate_image(b, c, r, m, alpha, gtol=DEFAULT_GTOL, maxiter=DEFAULT_MAXITER,
+                   lam0=None, return_dual=False):
+    """Solve the image dual (eq 9) via L-BFGS, recover x_hat via eq 15.
+
+    Parameters
+    ----------
+    lam0 : ndarray or None
+        Initial dual variable (warm start). If None, starts from zeros.
+    return_dual : bool
+        If True, return (x_hat, lam_opt) so the caller can cache the dual
+        variable for warm-starting subsequent calls.
+    """
     if m < 1:
         raise ValueError(f"Pixels per module m must be >= 1, got {m}")
     if alpha <= 0:
@@ -308,12 +318,16 @@ def estimate_image(b, c, r, m, alpha, gtol=DEFAULT_GTOL, maxiter=DEFAULT_MAXITER
         g = -b + inv_a * lam + fftconvolve(upscale(sig, m), c, mode='same')
         return f, g.ravel()
 
-    res = minimize(objective_and_grad, np.zeros(b.size), jac=True,
+    x0 = lam0.ravel() if lam0 is not None else np.zeros(b.size)
+    res = minimize(objective_and_grad, x0, jac=True,
                    method='L-BFGS-B', options={'maxiter': maxiter, 'gtol': gtol})
 
     lam_opt = res.x.reshape(shape_b)
     v_opt = downscale_sum(fftconvolve(lam_opt, c_flip, mode='same'), m)
-    return _sigmoid_r(v_opt, r)
+    x_hat = _sigmoid_r(v_opt, r)
+    if return_dual:
+        return x_hat, lam_opt
+    return x_hat
 
 
 # --- Kernel estimation (Section 2.2) ---
@@ -336,8 +350,18 @@ def _xt_lam(lam, signal_flip, Nm_shape, kernel_shape):
     return full[start_h : start_h + kh, start_w : start_w + kw].copy()
 
 
-def estimate_kernel(b, x_hat, kernel_shape, m, beta, gtol=DEFAULT_GTOL, maxiter=DEFAULT_MAXITER):
-    """Solve the kernel dual (eq 16) via L-BFGS, recover c_hat via weighted softmax (eq 17)."""
+def estimate_kernel(b, x_hat, kernel_shape, m, beta, gtol=DEFAULT_GTOL, maxiter=DEFAULT_MAXITER,
+                    lam0=None, return_dual=False):
+    """Solve the kernel dual (eq 16) via L-BFGS, recover c_hat via weighted softmax (eq 17).
+
+    Parameters
+    ----------
+    lam0 : ndarray or None
+        Initial dual variable (warm start). If None, starts from zeros.
+    return_dual : bool
+        If True, return (c_hat, lam_opt) so the caller can cache the dual
+        variable for warm-starting subsequent calls.
+    """
     if m < 1:
         raise ValueError(f"Pixels per module m must be >= 1, got {m}")
     if beta <= 0:
@@ -368,11 +392,15 @@ def estimate_kernel(b, x_hat, kernel_shape, m, beta, gtol=DEFAULT_GTOL, maxiter=
         g = -b + inv_b * lam + fftconvolve(signal, sm, mode='same')
         return f, g.ravel()
 
-    res = minimize(objective_and_grad, np.zeros(b.size), jac=True,
+    x0 = lam0.ravel() if lam0 is not None else np.zeros(b.size)
+    res = minimize(objective_and_grad, x0, jac=True,
                    method='L-BFGS-B', options={'maxiter': maxiter, 'gtol': gtol})
 
     lam_opt = res.x.reshape(shape_b)
-    return _softmax_w(xt(lam_opt).ravel(), nu).reshape(k_shape)
+    c_hat = _softmax_w(xt(lam_opt).ravel(), nu).reshape(k_shape)
+    if return_dual:
+        return c_hat, lam_opt
+    return c_hat
 
 
 # --- Algorithm 1: blind deblurring loop ---
@@ -957,7 +985,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Blind deblurring of barcodes')
     parser.add_argument('mode', nargs='?', default='barcode',
-                        choices=['barcode', 'qr', 'both', 'recovery', 'kernels'],
+                        choices=['barcode', 'qr', 'both', 'recovery', 'kernels',
+                                 'camera', 'video'],
                         help='Which demo to run (default: barcode)')
     parser.add_argument('--blur-width', type=int, default=None,
                         help='Blur kernel width (default: 21 for barcode, 5 for QR)')
@@ -976,6 +1005,15 @@ if __name__ == '__main__':
                         help='Motion blur angle in degrees (default: 0)')
     parser.add_argument('--no-show', action='store_true',
                         help='Skip matplotlib display (still saves PNG)')
+    parser.add_argument('--source', type=str, default='0',
+                        help='Camera index or video file path (for camera/video modes)')
+    parser.add_argument('--barcode-type', type=str, default='1d',
+                        choices=['1d', '2d'],
+                        help='Barcode type for camera/video mode (default: 1d)')
+    parser.add_argument('--version', type=int, default=None,
+                        help='QR version for 2d mode (default: auto-detect)')
+    parser.add_argument('--debug', action='store_true',
+                        help='Show debug overlay in camera mode')
 
     args = parser.parse_args()
 
@@ -1012,4 +1050,26 @@ if __name__ == '__main__':
             noise_var=args.noise,
             max_kernel_width=15,
             show=not args.no_show,
+        )
+
+    if args.mode == 'camera':
+        from .streaming import live_camera
+        source = int(args.source) if args.source.isdigit() else args.source
+        live_camera(
+            source=source,
+            barcode_type=args.barcode_type,
+            m=args.m or 3,
+            version=args.version,
+            max_kernel_width=15,
+            show_debug=args.debug,
+        )
+
+    if args.mode == 'video':
+        from .streaming import process_video
+        process_video(
+            args.source,
+            barcode_type=args.barcode_type,
+            m=args.m or 3,
+            version=args.version,
+            max_kernel_width=15,
         )
