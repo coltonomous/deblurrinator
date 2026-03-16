@@ -35,13 +35,16 @@ from .entropic_deblur import (
 )
 
 
-# Recovery-tuned defaults: looser tolerances trade accuracy for speed.
-# 1e-6 gtol and 200 maxiter give ~5-10x speedup over the full algorithm
-# (DEFAULT_GTOL=1e-10, DEFAULT_MAXITER=500) with minimal quality loss
-# on typical barcode inputs.
-RECOVERY_GTOL = 1e-6
-RECOVERY_MAXITER = 200
-RECOVERY_INNER_ITERS = 2
+# Recovery-tuned defaults: relaxed vs full algorithm but tight enough
+# to handle non-Gaussian kernels (box, motion) at moderate widths.
+# Benchmarked: 1e-8 gtol + 400 maxiter recovers box/motion blur at
+# width 9 (~60-80% success) while keeping Gaussian performance at 100%.
+# The higher maxiter lets L-BFGS converge properly on harder kernel
+# shapes and actually terminates faster on easy (Gaussian) problems
+# because the tighter gtol triggers early stopping.
+RECOVERY_GTOL = 1e-8
+RECOVERY_MAXITER = 400
+RECOVERY_INNER_ITERS = 3
 
 
 @dataclass

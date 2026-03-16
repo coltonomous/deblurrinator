@@ -1,0 +1,2432 @@
+[
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.08367916697170585
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.08437537495046854
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.29387508297804743
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.6121404590085149
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.8318334160139784
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.8413802080322057
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.071787708089687
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.089322290965356
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.5151247499743477
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.32358662493061274
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.17691879195626825
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.2249947499949485
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.7966540419729427
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.9606624579755589
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.24163454200606793
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.09427233401220292
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.15187854098621756
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3464879170060158
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.06321858300361782
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.06828608398791403
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.2984145830851048
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.07161579199600965
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.33749491698108613
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.4276194591075182
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.15139449993148446
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.2866458330536261
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.9007157499436289
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.25361450004857033
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.6917830409947783
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.0790130840614438
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.427210959023796
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.24172008293680847
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.07641041709575802
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.0793394580250606
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.2036837920313701
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.25765195896383375
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.2961658340645954
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.1685958750313148
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.4108094999101013
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3636965419864282
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3238822080893442
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.8190895000007004
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3687353749992326
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.192539207986556
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.44187341700308025
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.19058570789638907
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.19645366701297462
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.06619195791427046
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.7659903750754893
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.34910579200368375
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.2896488329861313
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.26374525006394833
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.2158551659667864
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.34183987509459257
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.4276206250069663
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.705481291981414
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.17182525002863258
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3751875419402495
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.246012832969427
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.353229416999966
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.09444729110691696
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.31416716694366187
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.14940808399114758
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.1224987079622224
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.5219576249364763
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3444231660105288
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.0205176250310615
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.1145145419286564
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.21000012499280274
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.1938878750661388
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.059107290930114686
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.5378993330523372
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.8120996250072494
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.12788270809687674
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.10636445903219283
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.47406683408189565
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.4746802500449121
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3548671669559553
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.10632091690786183
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.4903172079939395
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.1453732089139521
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.3607902079820633
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.16467083396855742
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 2.2336811249842867
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 4.577083125011995
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3387070830212906
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.13344374997541308
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 2.1222727079875767
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.5212367919739336
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "gaussian",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.2772421669214964
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.4694261249387637
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.35367245809175074
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.2768829580163583
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.6134153750026599
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.26496475003659725
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.5507773329736665
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.4589920410653576
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.21228720794897527
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.5368436659919098
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.5407351669855416
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.223453624988906
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.8679957500426099
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.48452049994375557
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.8119372089859098
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.39617941703181714
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.2215980000328273
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.701541916001588
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.3728448339970782
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 58.94736842105262,
+    "runtime_seconds": 3.9110812499420717
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 76.84210526315789,
+    "runtime_seconds": 3.457091083051637
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 61.05263157894737,
+    "runtime_seconds": 2.66378750000149
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 71.57894736842105,
+    "runtime_seconds": 4.14664874994196
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 60.0,
+    "runtime_seconds": 5.524423999944702
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 4.092487207963131
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 69.47368421052632,
+    "runtime_seconds": 2.877619625069201
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 73.68421052631578,
+    "runtime_seconds": 7.234638000023551
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 69.47368421052632,
+    "runtime_seconds": 3.1300129160517827
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 77.89473684210526,
+    "runtime_seconds": 4.459591582999565
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 62.10526315789474,
+    "runtime_seconds": 3.3593246249947697
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 76.84210526315789,
+    "runtime_seconds": 2.636505416012369
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 80.0,
+    "runtime_seconds": 2.5188246249454096
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 71.57894736842105,
+    "runtime_seconds": 2.580154041061178
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 60.0,
+    "runtime_seconds": 4.124218457960524
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 71.57894736842105,
+    "runtime_seconds": 2.6840307500679046
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 67.36842105263158,
+    "runtime_seconds": 2.658184083062224
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 67.36842105263158,
+    "runtime_seconds": 4.691162917064503
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 73.68421052631578,
+    "runtime_seconds": 2.980353750055656
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 64.21052631578948,
+    "runtime_seconds": 3.144440583069809
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 72.63157894736842,
+    "runtime_seconds": 2.974969333037734
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 58.94736842105262,
+    "runtime_seconds": 5.000508042052388
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 61.05263157894737,
+    "runtime_seconds": 3.4716476659523323
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 54.736842105263165,
+    "runtime_seconds": 5.042561499984004
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 70.52631578947368,
+    "runtime_seconds": 2.4092837090138346
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 74.73684210526315,
+    "runtime_seconds": 4.662949416902848
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 3.119149375008419
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 77.89473684210526,
+    "runtime_seconds": 3.9909675419330597
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 62.10526315789474,
+    "runtime_seconds": 2.934977832948789
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 73.68421052631578,
+    "runtime_seconds": 2.5781445839675143
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 74.73684210526315,
+    "runtime_seconds": 4.035202833008952
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 67.36842105263158,
+    "runtime_seconds": 5.701219249982387
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 71.57894736842105,
+    "runtime_seconds": 3.5963937499327585
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 67.36842105263158,
+    "runtime_seconds": 3.259535916033201
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 3.0105117079801857
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 68.42105263157895,
+    "runtime_seconds": 2.359271709108725
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 64.21052631578948,
+    "runtime_seconds": 4.91883862495888
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 2.648598250001669
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.517550125019625
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 70.52631578947368,
+    "runtime_seconds": 2.551233332953416
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 64.21052631578948,
+    "runtime_seconds": 2.5506057910388336
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 69.47368421052632,
+    "runtime_seconds": 2.9021270000375807
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.2821429580217227
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.7044935419689864
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.4555307499831542
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 70.52631578947368,
+    "runtime_seconds": 2.6399509160546586
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 58.94736842105262,
+    "runtime_seconds": 2.9574163750512525
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 53.68421052631579,
+    "runtime_seconds": 2.720239209011197
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 57.89473684210527,
+    "runtime_seconds": 2.420172750018537
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 70.52631578947368,
+    "runtime_seconds": 2.4517552909674123
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 55.78947368421052,
+    "runtime_seconds": 2.95525383297354
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 56.84210526315789,
+    "runtime_seconds": 3.0454781249864027
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 57.89473684210527,
+    "runtime_seconds": 2.670458541950211
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 61.05263157894737,
+    "runtime_seconds": 2.651413790998049
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.7551506670424715
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 3.207026834017597
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 68.42105263157895,
+    "runtime_seconds": 3.3480149999959394
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 69.47368421052632,
+    "runtime_seconds": 2.8060090830549598
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 64.21052631578948,
+    "runtime_seconds": 2.4768775830743834
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 61.05263157894737,
+    "runtime_seconds": 2.2394158749375492
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.28430641698651
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 58.94736842105262,
+    "runtime_seconds": 2.429516625008546
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 62.10526315789474,
+    "runtime_seconds": 2.376086083939299
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 58.94736842105262,
+    "runtime_seconds": 2.4306682919850573
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 52.63157894736842,
+    "runtime_seconds": 2.276943458011374
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 68.42105263157895,
+    "runtime_seconds": 2.233262541005388
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.6328702500322834
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 67.36842105263158,
+    "runtime_seconds": 2.957241458003409
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 50.526315789473685,
+    "runtime_seconds": 2.566577292047441
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.5813860839698464
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 54.736842105263165,
+    "runtime_seconds": 2.9263610410271212
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "box",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.296618082909845
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.25728925003204495
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.2022563749924302
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3074204159202054
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.057322332984767854
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.3139136249665171
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.8524986669654027
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.37642104201950133
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.7840401669964194
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.7225711250212044
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.17699029191862792
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.657056708005257
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.8245394999394193
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 97.89473684210527,
+    "runtime_seconds": 2.5677589590195566
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.23416708305012435
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 5,
+    "noise_level": 0.01,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.4469904579455033
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.9436074160039425
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 71.57894736842105,
+    "runtime_seconds": 2.3569868750637397
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.7258911670651287
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 74.73684210526315,
+    "runtime_seconds": 2.6319470829330385
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.0,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 0.8424530830234289
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 3.4121059169992805
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 71.57894736842105,
+    "runtime_seconds": 2.992857582983561
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 50.526315789473685,
+    "runtime_seconds": 2.462472415994853
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 74.73684210526315,
+    "runtime_seconds": 2.7750614589313045
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.005,
+    "success": true,
+    "module_accuracy": 100.0,
+    "runtime_seconds": 1.0386748749297112
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 62.10526315789474,
+    "runtime_seconds": 2.4453570829937235
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 72.63157894736842,
+    "runtime_seconds": 2.611380791058764
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 68.42105263157895,
+    "runtime_seconds": 2.447496333043091
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 73.68421052631578,
+    "runtime_seconds": 3.243096416001208
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 9,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 2.5041854579467326
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 64.21052631578948,
+    "runtime_seconds": 2.6036849579541013
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 56.84210526315789,
+    "runtime_seconds": 2.7099342920118943
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 67.36842105263158,
+    "runtime_seconds": 2.592561792000197
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.4989196250680834
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 73.68421052631578,
+    "runtime_seconds": 2.5986104579642415
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 56.84210526315789,
+    "runtime_seconds": 2.502183042000979
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 67.36842105263158,
+    "runtime_seconds": 2.452067625010386
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 81.05263157894737,
+    "runtime_seconds": 2.7381286249728873
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 62.10526315789474,
+    "runtime_seconds": 2.431290457956493
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 81.05263157894737,
+    "runtime_seconds": 2.6470883750589564
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.5815176249016076
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 60.0,
+    "runtime_seconds": 2.4870672079268843
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 60.0,
+    "runtime_seconds": 2.4925279999151826
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 55.78947368421052,
+    "runtime_seconds": 3.2473245000001043
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 13,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.545308665954508
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 73.68421052631578,
+    "runtime_seconds": 2.340198833029717
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 71.57894736842105,
+    "runtime_seconds": 2.5055282909888774
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 78.94736842105263,
+    "runtime_seconds": 2.452609332976863
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 52.63157894736842,
+    "runtime_seconds": 2.3247468329500407
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 62.10526315789474,
+    "runtime_seconds": 2.466621082974598
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 68.42105263157895,
+    "runtime_seconds": 2.4584389170631766
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 68.42105263157895,
+    "runtime_seconds": 2.5149568748893216
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 60.0,
+    "runtime_seconds": 2.530405499972403
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 76.84210526315789,
+    "runtime_seconds": 2.3290360419778153
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.5215637909714133
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 70.52631578947368,
+    "runtime_seconds": 2.4268481249455363
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 56.84210526315789,
+    "runtime_seconds": 2.3303013329859823
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 73.68421052631578,
+    "runtime_seconds": 3.8153836659621447
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 70.52631578947368,
+    "runtime_seconds": 2.4136407918995246
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 17,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 70.52631578947368,
+    "runtime_seconds": 2.4969518330181018
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 69.47368421052632,
+    "runtime_seconds": 2.186236207955517
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 2.2484183330088854
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.178104625083506
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.1910242500016466
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 69.47368421052632,
+    "runtime_seconds": 2.3570352499373257
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 67.36842105263158,
+    "runtime_seconds": 2.296835249988362
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 68.42105263157895,
+    "runtime_seconds": 2.428802541922778
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.3502397920237854
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.363405750016682
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 2.207014249986969
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 55.78947368421052,
+    "runtime_seconds": 2.519414250040427
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.485978625016287
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 2.1895493749761954
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 64.21052631578948,
+    "runtime_seconds": 2.3386838329024613
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 21,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 2.397238790988922
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 53.68421052631579,
+    "runtime_seconds": 2.27404370799195
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 58.94736842105262,
+    "runtime_seconds": 2.8406516670947894
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.22177974996157
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 2.434483916964382
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.0,
+    "success": false,
+    "module_accuracy": 53.68421052631579,
+    "runtime_seconds": 2.4205066659487784
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 62.10526315789474,
+    "runtime_seconds": 2.4408723750384524
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 53.68421052631579,
+    "runtime_seconds": 2.3821326249744743
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 68.42105263157895,
+    "runtime_seconds": 2.4717593749519438
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 57.89473684210527,
+    "runtime_seconds": 2.438390458934009
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.005,
+    "success": false,
+    "module_accuracy": 66.3157894736842,
+    "runtime_seconds": 2.462344958097674
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 63.1578947368421,
+    "runtime_seconds": 2.3433106660377234
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 60.0,
+    "runtime_seconds": 2.285878250026144
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 65.26315789473685,
+    "runtime_seconds": 2.493024291936308
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 50.526315789473685,
+    "runtime_seconds": 2.310388750047423
+  },
+  {
+    "barcode_type": "1d",
+    "kernel_type": "motion",
+    "blur_width": 25,
+    "noise_level": 0.01,
+    "success": false,
+    "module_accuracy": 64.21052631578948,
+    "runtime_seconds": 2.2239534999243915
+  }
+]
