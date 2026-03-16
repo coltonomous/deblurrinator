@@ -325,9 +325,18 @@ class StreamProcessor:
 
     def __init__(self, barcode_type='1d', m=3, version=None,
                  max_kernel_width=15, sharpness_percentile=0.3,
-                 queue_size=2, alpha=DEFAULT_ALPHA, beta=DEFAULT_BETA):
+                 queue_size=2, alpha=DEFAULT_ALPHA, beta=DEFAULT_BETA,
+                 roi=None):
+        """
+        Parameters
+        ----------
+        roi : tuple (x, y, w, h) or None
+            Fixed region of interest to crop from each frame before
+            processing. If None, uses the full frame.
+        """
         self._barcode_type = barcode_type
         self._m = m
+        self._roi = roi
         self._max_kernel_width = max_kernel_width
         self._alpha = alpha
         self._beta = beta
@@ -389,6 +398,9 @@ class StreamProcessor:
     def _preprocess_frame(self, frame):
         """Convert a camera frame to the signal expected by the algorithm."""
         img = load_image(frame)
+        if self._roi is not None:
+            rx, ry, rw, rh = self._roi
+            img = img[ry:ry+rh, rx:rx+rw]
         if self._barcode_type == '1d':
             return extract_barcode_scanline(img, m=self._m)
         else:
@@ -442,7 +454,7 @@ def process_video(video_path, barcode_type='1d', m=3, version=None,
                   max_kernel_width=15, skip_frames=0,
                   sharpness_percentile=0.3,
                   alpha=DEFAULT_ALPHA, beta=DEFAULT_BETA,
-                  verbose=True):
+                  roi=None, verbose=True):
     """Process a video file frame-by-frame with warm-starting.
 
     Parameters
@@ -459,6 +471,8 @@ def process_video(video_path, barcode_type='1d', m=3, version=None,
         Only process every Nth frame (0 = process all passing sharpness).
     sharpness_percentile : float
         Fraction of frames to skip as too blurry.
+    roi : tuple (x, y, w, h) or None
+        Crop region of interest from each frame before processing.
     verbose : bool
         Print progress and results.
 
@@ -503,6 +517,9 @@ def process_video(video_path, barcode_type='1d', m=3, version=None,
 
         # Preprocess
         img = gray.astype(np.float64) / 255.0
+        if roi is not None:
+            rx, ry, rw, rh = roi
+            img = img[ry:ry+rh, rx:rx+rw]
         if barcode_type == '1d':
             b = extract_barcode_scanline(img, m=m)
         else:
