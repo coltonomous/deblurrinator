@@ -599,8 +599,31 @@ def _pick_snapshots(snapshots, n=4):
 
 # --- Demos ---
 
+def _make_kernel_1d(kernel_type, width, sigma):
+    """Build a 1D blur kernel by name. Motion blur in 1D is a box filter."""
+    if kernel_type == 'gaussian':
+        return gaussian_kernel_1d(width, sigma)
+    elif kernel_type == 'box':
+        return box_kernel_1d(width)
+    elif kernel_type == 'motion':
+        return box_kernel_1d(width)  # 1D motion = uniform/box
+    raise ValueError(f"Unknown kernel type {kernel_type!r}")
+
+
+def _make_kernel_2d(kernel_type, width, sigma, angle=0):
+    """Build a 2D blur kernel by name."""
+    if kernel_type == 'gaussian':
+        return gaussian_kernel_2d(width, sigma)
+    elif kernel_type == 'box':
+        return box_kernel_2d(width)
+    elif kernel_type == 'motion':
+        return motion_kernel(width, angle_deg=angle)
+    raise ValueError(f"Unknown kernel type {kernel_type!r}")
+
+
 def demo(blur_width=21, sigma=1.0, m=3, noise_var=0.0,
-         alpha=DEFAULT_ALPHA, beta=DEFAULT_BETA, max_kernel_width=15, show=True):
+         alpha=DEFAULT_ALPHA, beta=DEFAULT_BETA, max_kernel_width=15,
+         kernel_type='gaussian', show=True):
     """Blind-deblur a synthetic UPC-A barcode with visualization."""
     import random
     import matplotlib.pyplot as plt
@@ -610,9 +633,9 @@ def demo(blur_width=21, sigma=1.0, m=3, noise_var=0.0,
     print(f"Original barcode: {digits}")
 
     x = encode_upca(digits)
-    kernel = gaussian_kernel_1d(blur_width, sigma)
+    kernel = _make_kernel_1d(kernel_type, blur_width, sigma)
     b, r_inv = prepare_signal_1d(x, m, kernel, noise_var)
-    print(f"Gaussian blur: width={blur_width}, sigma={sigma:.1f}, m={m}")
+    print(f"{kernel_type.capitalize()} blur: width={blur_width}, sigma={sigma:.1f}, m={m}")
 
     check = make_check_fn(m)
     extract = make_extract_fn_1d(UPCA_QUIET_ZONE, UPCA_N)
@@ -693,7 +716,7 @@ def demo(blur_width=21, sigma=1.0, m=3, noise_var=0.0,
         ax.set_xticks([])
         ax.set_yticks([])
 
-    fig.suptitle(f'UPC-A Blind Deblurring — {digits}', fontsize=11, y=1.02)
+    fig.suptitle(f'UPC-A Blind Deblurring ({kernel_type}) — {digits}', fontsize=11, y=1.02)
     plt.tight_layout()
     plt.savefig('demo_barcode.png', dpi=150, bbox_inches='tight')
     print("Saved demo_barcode.png")
@@ -704,7 +727,8 @@ def demo(blur_width=21, sigma=1.0, m=3, noise_var=0.0,
 
 def demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5,
             noise_var=0.0, alpha=DEFAULT_ALPHA, beta=DEFAULT_BETA,
-            error_correction='M', version=None, max_kernel_width=11, show=True):
+            error_correction='M', version=None, max_kernel_width=11,
+            kernel_type='gaussian', angle=0, show=True):
     """Blind-deblur a synthetic QR code with visualization."""
     import matplotlib.pyplot as plt
 
@@ -712,9 +736,9 @@ def demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5,
     size = qr_size(ver)
     print(f"QR data={data!r}, version {ver} ({size}x{size})")
 
-    kernel = gaussian_kernel_2d(blur_width, sigma)
+    kernel = _make_kernel_2d(kernel_type, blur_width, sigma, angle)
     b, r_inv = prepare_signal_2d(x, m, kernel, noise_var, version=ver)
-    print(f"Gaussian blur: width={blur_width}, sigma={sigma:.1f}, signal {b.shape}")
+    print(f"{kernel_type.capitalize()} blur: width={blur_width}, sigma={sigma:.1f}, signal {b.shape}")
 
     check = make_qr_check_fn(m)
     extract = make_extract_fn_2d(QR_QUIET_ZONE, size)
@@ -786,7 +810,7 @@ def demo_qr(data="HELLO WORLD", blur_width=5, sigma=1.0, m=5,
         ax.set_xticks([])
         ax.set_yticks([])
 
-    fig.suptitle(f'QR Blind Deblurring — {data!r}', fontsize=11, y=1.02)
+    fig.suptitle(f'QR Blind Deblurring ({kernel_type}) — {data!r}', fontsize=11, y=1.02)
     plt.tight_layout()
     plt.savefig('demo_qr.png', dpi=150, bbox_inches='tight')
     print("Saved demo_qr.png")
@@ -838,12 +862,102 @@ def demo_recovery():
         print(f"Speedup: {t_full / t_fast:.1f}x")
 
 
+def demo_kernel_comparison(blur_width=21, sigma=1.0, m=3, noise_var=0.0,
+                           max_kernel_width=15, show=True):
+    """Run the same barcode through gaussian, box, and motion blur side-by-side."""
+    import random
+    import matplotlib.pyplot as plt
+
+    digits = ''.join([str(random.randint(0, 9)) for _ in range(11)])
+    digits += compute_check_digit(digits)
+    x = encode_upca(digits)
+    print(f"Kernel comparison — UPC-A {digits}, blur_width={blur_width}")
+
+    kernel_types = ['gaussian', 'box', 'motion']
+    results = []
+
+    for kt in kernel_types:
+        kernel = _make_kernel_1d(kt, blur_width, sigma)
+        b, r_inv = prepare_signal_1d(x, m, kernel, noise_var)
+
+        check = make_check_fn(m)
+        extract = make_extract_fn_1d(UPCA_QUIET_ZONE, UPCA_N)
+
+        snaps = []
+        entropic_blind_deblur(
+            b, r_inv, m, max_kernel_width=max_kernel_width,
+            check_fn=None, extract_fn=extract,
+            snapshots=snaps, verbose=False,
+        )
+
+        # Find decode point
+        x_hat, c_hat, success = None, None, False
+        for x_snap, c_snap, kw, it in snaps:
+            if check and check(x_snap):
+                x_hat, c_hat, success = x_snap, c_snap, True
+                print(f"  {kt:10s}: decoded at kw={kw}, iter={it}")
+                break
+        if not success:
+            x_hat = snaps[-1][0] if snaps else extract(r_inv)
+            c_hat = snaps[-1][1] if snaps else kernel
+            print(f"  {kt:10s}: FAILED")
+
+        acc = np.mean(x_hat == x) * 100
+        results.append((kt, b, kernel, x_hat, c_hat, success, acc))
+
+    if not show:
+        return results
+
+    fig, axes = plt.subplots(len(kernel_types), 4, figsize=(14, 3 * len(kernel_types)),
+                             gridspec_kw={'width_ratios': [2, 2, 2, 1]})
+    bar_h = 60
+
+    for row, (kt, b, true_k, x_hat, est_k, ok, acc) in enumerate(results):
+        # Original
+        axes[row, 0].imshow(_barcode_img(x, m, bar_h), cmap='gray', vmin=0, vmax=255)
+        axes[row, 0].set_ylabel(kt.capitalize(), fontsize=10, fontweight='bold')
+        if row == 0:
+            axes[row, 0].set_title('Original', fontsize=9)
+
+        # Blurred
+        blurred_vis = np.tile((np.clip(b, 0, 1) * 255).astype(np.uint8).reshape(1, -1), (bar_h, 1))
+        axes[row, 1].imshow(blurred_vis, cmap='gray', vmin=0, vmax=255)
+        if row == 0:
+            axes[row, 1].set_title('Blurred', fontsize=9)
+
+        # Recovered
+        color = 'green' if ok else 'red'
+        axes[row, 2].imshow(_barcode_img(x_hat, m, bar_h), cmap='gray', vmin=0, vmax=255)
+        label = f'{acc:.0f}% {"OK" if ok else "FAIL"}'
+        if row == 0:
+            axes[row, 2].set_title('Recovered', fontsize=9)
+        axes[row, 2].text(0.98, 0.05, label, transform=axes[row, 2].transAxes,
+                          ha='right', va='bottom', fontsize=8, color=color, fontweight='bold')
+
+        # Estimated kernel
+        axes[row, 3].bar(range(len(est_k.ravel())), est_k.ravel(), color='steelblue', width=0.8)
+        if row == 0:
+            axes[row, 3].set_title('Est. kernel', fontsize=9)
+
+    for ax in axes.flat:
+        ax.set_xticks([])
+        ax.set_yticks([])
+
+    fig.suptitle(f'Kernel Comparison — UPC-A {digits} (w={blur_width})', fontsize=11, y=1.02)
+    plt.tight_layout()
+    plt.savefig('demo_kernels.png', dpi=150, bbox_inches='tight')
+    print("Saved demo_kernels.png")
+    plt.show()
+
+    return results
+
+
 if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser(description='Blind deblurring of barcodes')
     parser.add_argument('mode', nargs='?', default='barcode',
-                        choices=['barcode', 'qr', 'both', 'recovery'],
+                        choices=['barcode', 'qr', 'both', 'recovery', 'kernels'],
                         help='Which demo to run (default: barcode)')
     parser.add_argument('--blur-width', type=int, default=None,
                         help='Blur kernel width (default: 21 for barcode, 5 for QR)')
@@ -855,6 +969,11 @@ if __name__ == '__main__':
                         help='Noise variance (default: 0.0)')
     parser.add_argument('--data', type=str, default='HELLO WORLD',
                         help='QR data string (default: "HELLO WORLD")')
+    parser.add_argument('--kernel', type=str, default='gaussian',
+                        choices=['gaussian', 'box', 'motion'],
+                        help='Blur kernel type (default: gaussian)')
+    parser.add_argument('--angle', type=float, default=0.0,
+                        help='Motion blur angle in degrees (default: 0)')
     parser.add_argument('--no-show', action='store_true',
                         help='Skip matplotlib display (still saves PNG)')
 
@@ -866,6 +985,7 @@ if __name__ == '__main__':
             sigma=args.sigma,
             m=args.m or 3,
             noise_var=args.noise,
+            kernel_type=args.kernel,
             show=not args.no_show,
         )
 
@@ -876,8 +996,20 @@ if __name__ == '__main__':
             sigma=args.sigma,
             m=args.m or 5,
             noise_var=args.noise,
+            kernel_type=args.kernel,
+            angle=args.angle,
             show=not args.no_show,
         )
 
     if args.mode == 'recovery':
         demo_recovery()
+
+    if args.mode == 'kernels':
+        demo_kernel_comparison(
+            blur_width=args.blur_width or 21,
+            sigma=args.sigma,
+            m=args.m or 3,
+            noise_var=args.noise,
+            max_kernel_width=15,
+            show=not args.no_show,
+        )

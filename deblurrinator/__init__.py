@@ -31,4 +31,20 @@ from .entropic_deblur import (
     QR_QUIET_ZONE,
     demo,
     demo_qr,
+    demo_kernel_comparison,
+)
+from .image_input import (
+    load_image,
+    detect_barcode_roi,
+    extract_barcode_scanline,
+    extract_qr_region,
+    deblur_from_image,
+)
+from .benchmark import (
+    BenchmarkConfig,
+    BenchmarkResult,
+    run_benchmark,
+    summarize_results,
+    print_results_table,
+    plot_results,
 )
