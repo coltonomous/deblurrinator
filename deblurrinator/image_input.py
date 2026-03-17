@@ -28,6 +28,12 @@ try:
 except ImportError:
     _HAS_CV2 = False
 
+try:
+    from pyzbar.pyzbar import decode as pyzbar_decode
+    _HAS_PYZBAR = True
+except ImportError:
+    _HAS_PYZBAR = False
+
 
 def _require_cv2():
     if not _HAS_CV2:
@@ -70,28 +76,39 @@ def load_image(source: Union[str, Path, np.ndarray]) -> np.ndarray:
     return np.clip(img.astype(np.float64), 0, 1)
 
 
-def detect_barcode_roi(image: np.ndarray, barcode_type: str = 'any'):
-    """Detect barcode regions in an image using gradient analysis.
+def _pyzbar_detect(image: np.ndarray, barcode_type: str) -> list:
+    """Try to detect barcodes using pyzbar. Returns candidates list or empty."""
+    if not _HAS_PYZBAR:
+        return []
 
-    Uses morphological operations on the gradient magnitude to find
-    rectangular high-contrast regions likely to contain barcodes.
+    img_u8 = (image * 255).astype(np.uint8)
+    results = pyzbar_decode(img_u8)
+    if not results:
+        return []
 
-    This is best-effort — heavily blurred images may not produce useful
-    detections. Consider passing a pre-cropped ROI instead.
+    candidates = []
+    for r in results:
+        x, y, w, h = r.rect
+        if w < 20 or h < 20:
+            continue
+        aspect = w / h if h > 0 else 0
 
-    Parameters
-    ----------
-    image : ndarray
-        Grayscale image, float64 in [0, 1].
-    barcode_type : str
-        'any', '1d', or '2d'. Filters candidates by aspect ratio.
+        if barcode_type == '1d' and aspect < 2.0:
+            continue
+        if barcode_type == '2d' and (aspect < 0.5 or aspect > 2.0):
+            continue
 
-    Returns
-    -------
-    list of dict
-        Each dict has 'bbox' (x, y, w, h) and 'aspect_ratio'.
-        Sorted by area (largest first).
-    """
+        candidates.append({
+            'bbox': (x, y, w, h),
+            'aspect_ratio': aspect,
+        })
+
+    candidates.sort(key=lambda c: c['bbox'][2] * c['bbox'][3], reverse=True)
+    return candidates
+
+
+def _gradient_detect(image: np.ndarray, barcode_type: str) -> list:
+    """Fallback ROI detection using gradient analysis and morphology."""
     _require_cv2()
 
     img_u8 = (image * 255).astype(np.uint8)
@@ -120,7 +137,6 @@ def detect_barcode_roi(image: np.ndarray, barcode_type: str = 'any'):
             continue
         aspect = w / h if h > 0 else 0
 
-        # Filter by expected aspect ratio
         if barcode_type == '1d' and aspect < 2.0:
             continue
         if barcode_type == '2d' and (aspect < 0.5 or aspect > 2.0):
@@ -131,9 +147,34 @@ def detect_barcode_roi(image: np.ndarray, barcode_type: str = 'any'):
             'aspect_ratio': aspect,
         })
 
-    # Sort by area, largest first
     candidates.sort(key=lambda c: c['bbox'][2] * c['bbox'][3], reverse=True)
     return candidates
+
+
+def detect_barcode_roi(image: np.ndarray, barcode_type: str = 'any'):
+    """Detect barcode regions in an image.
+
+    First attempts detection via pyzbar (fast, accurate when the barcode
+    is readable). Falls back to gradient-based morphological detection
+    for blurred images that pyzbar can't decode.
+
+    Parameters
+    ----------
+    image : ndarray
+        Grayscale image, float64 in [0, 1].
+    barcode_type : str
+        'any', '1d', or '2d'. Filters candidates by aspect ratio.
+
+    Returns
+    -------
+    list of dict
+        Each dict has 'bbox' (x, y, w, h) and 'aspect_ratio'.
+        Sorted by area (largest first).
+    """
+    candidates = _pyzbar_detect(image, barcode_type)
+    if candidates:
+        return candidates
+    return _gradient_detect(image, barcode_type)
 
 
 def extract_barcode_scanline(
